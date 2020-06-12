@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>Sample App</title>
-</head>
 <body>
-<h1>Hi!</h1>
+<h2>Add</h2>
+<form method="post" action="/new">
+    <p>Content<input type="text" name="text" size="30" placeholder="入力してください" ></p>
+    <p>Status
+        <select name="status">
+            <option value="未実行">NoExecute</option>
+            <option value="実行中">Running</option>
+            <option value="終了">Terminate</option>
+        </select>
+    </p>
+    <p><input type="submit" value="Send"></p>
+</form>
+
+<ul>
+    {{ range .todos }}
+        <li>Content：{{ .Text }}、状態：{{ .Status }}
+            <label><a href="/detail/{{.ID}}">Edit</a></label>
+            <label><a href="/delete_check/{{.ID}}">Delete</a></label>
+        </li>
+    {{end}}
+</ul>
 </body>
-</html>
