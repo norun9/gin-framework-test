@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/lib/pq"
+	"strconv"
 )
 
 type Todo struct {
@@ -82,9 +83,30 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 
-	data := "Hello Go/Gin"
+	dbInit()
+
 	router.GET("/", func(ctx *gin.Context) {
-		ctx.HTML(200, "index.html", gin.H{"data": data})
+		todos := dbGetAll()
+		ctx.HTML(200, "index.html", gin.H{
+			"todos": todos,
+		})
+	})
+
+	router.POST("/new", func(ctx *gin.Context) {
+		text := ctx.PostForm("text")
+		status := ctx.PostForm("status")
+		dbInsert(text, status)
+		ctx.Redirect(302, "/")
+	})
+
+	router.GET("/show/:id", func(ctx *gin.Context) {
+		i := ctx.Param("id")
+		id, err := strconv.Atoi(i)
+		if err != nil {
+			panic(err)
+		}
+		todo := dbGetOne(id)
+		ctx.HTML(200, "show.html", gin.H{"todo": todo})
 	})
 
 	router.Run()
