@@ -8,13 +8,19 @@ import (
 )
 
 type Todo struct {
-	gorm.Model
 	Text   string
 	Status string
 }
 
+var Db *gorm.DB
+
 func dbInit() {
-	db, err := sql.Open("postgres", "username=tomoyaueno dbname=gogin password=gogin sslmode=disable")
+	Db, err := gorm.Open("postgres", "username=tomoyaueno dbname=gogin password=gogin sslmode=disable")
+	if err != nil {
+		panic(err)
+	}
+	Db.AutoMigrate(&Todo{})
+	defer Db.Close()
 }
 
 func main() {
