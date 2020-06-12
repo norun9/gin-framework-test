@@ -112,6 +112,7 @@ func main() {
 		ctx.HTML(200, "show.html", gin.H{"todo": todo})
 	})
 
+	//Update
 	router.POST("/update/:id", func(ctx *gin.Context) {
 		i := ctx.Param("id")
 		id, err := strconv.Atoi(i)
@@ -124,6 +125,7 @@ func main() {
 		ctx.Redirect(302, "/")
 	})
 
+	//DeleteCheck
 	router.GET("/delete_check/:id", func(ctx *gin.Context) {
 		i := ctx.Param("id")
 		id, err := strconv.Atoi(i)
@@ -134,6 +136,7 @@ func main() {
 		ctx.HTML(200, "delete.html", gin.H{"todo": todo})
 	})
 
+	//Delete
 	router.POST("/delete/:id", func(ctx *gin.Context) {
 		i := ctx.Param("id")
 		id, err := strconv.Atoi(i)
