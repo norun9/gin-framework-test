@@ -4,9 +4,9 @@
     <p>Content<input type="text" name="text" size="30" placeholder="入力してください" ></p>
     <p>Status
         <select name="status">
-            <option value="未実行">NoExecute</option>
-            <option value="実行中">Running</option>
-            <option value="終了">Terminate</option>
+            <option value="Waiting">Waiting</option>
+            <option value="Running">Running</option>
+            <option value="Terminate">Terminate</option>
         </select>
     </p>
     <p><input type="submit" value="Send"></p>
@@ -14,7 +14,7 @@
 
 <ul>
     {{ range .todos }}
-        <li>Content：{{ .Text }}、状態：{{ .Status }}
+        <li>Content：{{ .Text }}、Status：{{ .Status }}
             <label><a href="/detail/{{.ID}}">Edit</a></label>
             <label><a href="/delete_check/{{.ID}}">Delete</a></label>
         </li>
