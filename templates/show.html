@@ -1,0 +1,29 @@
+<body>
+<h2>aaa</h2>
+
+<p>{{.user.ID}}</p>
+<p>{{.user.Name}}</p>
+<p>{{.user.Age}}</p>
+
+<form method="post" action="/update/{{.todo.ID}}">
+    <p>Content<input type="text" name="text" size="30" value="{{.todo.Text}}" ></p>
+    <p>Status
+        <select name="status">
+            {{if eq .todo.Status "Waiting"}}
+                <option value="Waiting" selected>Waiting</option>
+                <option value="Running">Running</option>
+                <option value="Terminate">Terminate</option>
+            {{else if eq .todo.Status "Running"}}
+                <option value="Waiting">Waiting</option>
+                <option value="Running" selected>Running</option>
+                <option value="Terminate">Terminate</option>
+            {{else}}
+                <option value="Waiting">Waiting</option>
+                <option value="Running">Running</option>
+                <option value="Terminate" selected>Terminate</option>
+            {{end}}
+        </select>
+    </p>
+    <p><input type="submit" value="Send"></p>
+</form>
+</body>
