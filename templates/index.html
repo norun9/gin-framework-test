@@ -1,5 +1,5 @@
 <body>
-<h2>Add</h2>
+<h2>ADD</h2>
 <form method="post" action="/new">
     <p>Content<input type="text" name="text" size="30" placeholder="入力してください" ></p>
     <p>Status
@@ -15,7 +15,7 @@
 <ul>
     {{ range .todos }}
         <li>Content：{{ .Text }}、Status：{{ .Status }}
-            <label><a href="/detail/{{.ID}}">Edit</a></label>
+            <label><a href="/show/{{.ID}}">Edit</a></label>
             <label><a href="/delete_check/{{.ID}}">Delete</a></label>
         </li>
     {{end}}
