@@ -129,7 +129,7 @@ func main() {
 	router.GET("/delete_check/:id", func(ctx *gin.Context) {
 		i := ctx.Param("id")
 		id, err := strconv.Atoi(i)
-		if err !=  nil {
+		if err != nil {
 			panic(err)
 		}
 		todo := dbGetOne(id)
