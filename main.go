@@ -74,7 +74,8 @@ func dbGetOne(id int) Todo {
 	}
 	var todo Todo
 	Db.First(&todo, id)
-	db
+	Db.Close()
+	return todo
 }
 
 func main() {
