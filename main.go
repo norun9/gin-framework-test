@@ -85,6 +85,7 @@ func main() {
 
 	dbInit()
 
+	//Index
 	router.GET("/", func(ctx *gin.Context) {
 		todos := dbGetAll()
 		ctx.HTML(200, "index.html", gin.H{
@@ -92,6 +93,7 @@ func main() {
 		})
 	})
 
+	//Create
 	router.POST("/new", func(ctx *gin.Context) {
 		text := ctx.PostForm("text")
 		status := ctx.PostForm("status")
@@ -99,6 +101,7 @@ func main() {
 		ctx.Redirect(302, "/")
 	})
 
+	//Show
 	router.GET("/show/:id", func(ctx *gin.Context) {
 		i := ctx.Param("id")
 		id, err := strconv.Atoi(i)
@@ -107,6 +110,38 @@ func main() {
 		}
 		todo := dbGetOne(id)
 		ctx.HTML(200, "show.html", gin.H{"todo": todo})
+	})
+
+	router.POST("/update/:id", func(ctx *gin.Context) {
+		i := ctx.Param("id")
+		id, err := strconv.Atoi(i)
+		if err != nil {
+			panic(err)
+		}
+		text := ctx.PostForm("text")
+		status := ctx.PostForm("status")
+		dbUpdate(id, text, status)
+		ctx.Redirect(302, "/")
+	})
+
+	router.GET("/delete_check/:id", func(ctx *gin.Context) {
+		i := ctx.Param("id")
+		id, err := strconv.Atoi(i)
+		if err !=  nil {
+			panic(err)
+		}
+		todo := dbGetOne(id)
+		ctx.HTML(200, "delete.html", gin.H{"todo": todo})
+	})
+
+	router.POST("/delete/:id", func(ctx *gin.Context) {
+		i := ctx.Param("id")
+		id, err := strconv.Atoi(i)
+		if err != nil {
+			panic(err)
+		}
+		dbDelete(id)
+		ctx.Redirect(302, "/")
 	})
 
 	router.Run()
