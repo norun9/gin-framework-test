@@ -5,17 +5,20 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/lib/pq"
 	"strconv"
+	"time"
 )
 
 type Todo struct {
-	Text   string
-	Status string
+	ID		  int
+	Text      string
+	Status    string
+	CreatedAt time.Time
 }
 
 var Db *gorm.DB
 
 func dbInit() {
-	Db, err := gorm.Open("postgres", "username=tomoyaueno dbname=gogin password=gogin sslmode=disable")
+	Db, err := gorm.Open("postgres", "user=tomoyaueno dbname=gogin password=gogin sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -24,7 +27,7 @@ func dbInit() {
 }
 
 func dbInsert(text string, status string) {
-	Db, err := gorm.Open("postgres", "username=tomoyaueno dbname=gogin password=gogin sslmode=disable")
+	Db, err := gorm.Open("postgres", "user=tomoyaueno dbname=gogin password=gogin sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -33,7 +36,7 @@ func dbInsert(text string, status string) {
 }
 
 func dbUpdate(id int, text string, status string) {
-	Db, err := gorm.Open("postgres", "username=tomoyaueno dbname=gogin password=gogin sslmode=disable")
+	Db, err := gorm.Open("postgres", "user=tomoyaueno dbname=gogin password=gogin sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -46,7 +49,7 @@ func dbUpdate(id int, text string, status string) {
 }
 
 func dbDelete(id int) {
-	Db, err := gorm.Open("postgres", "username=tomoyaueno dbname=gogin password=gogin sslmode=disable")
+	Db, err := gorm.Open("postgres", "user=tomoyaueno dbname=gogin password=gogin sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -58,7 +61,7 @@ func dbDelete(id int) {
 }
 
 func dbGetAll() []Todo {
-	Db, err := gorm.Open("postgres", "username=tomoyaueno dbname=gogin password=gogin sslmode=disable")
+	Db, err := gorm.Open("postgres", "user=tomoyaueno dbname=gogin password=gogin sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -69,7 +72,7 @@ func dbGetAll() []Todo {
 }
 
 func dbGetOne(id int) Todo {
-	Db, err := gorm.Open("postgres", "username=tomoyaueno dbname=gogin password=gogin sslmode=disable")
+	Db, err := gorm.Open("postgres", "user=tomoyaueno dbname=gogin password=gogin sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
