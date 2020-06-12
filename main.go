@@ -67,6 +67,16 @@ func dbGetAll() []Todo {
 	return todos
 }
 
+func dbGetOne(id int) Todo {
+	Db, err := gorm.Open("postgres", "username=tomoyaueno dbname=gogin password=gogin sslmode=disable")
+	if err != nil {
+		panic(err)
+	}
+	var todo Todo
+	Db.First(&todo, id)
+	db
+}
+
 func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
